@@ -269,4 +269,15 @@ public class InventoryManager {
             System.out.println(Colors.GREEN + " All drugs have sufficient stock!" + Colors.RESET);
         }
     }
+
+    public Drug searchByCode(String code) {
+        structures.LinkedList.Node current = inventory.getHead();
+        while (current != null) {
+            if (current.drug.code.equalsIgnoreCase(code.trim())) {
+                return current.drug;
+            }
+            current = current.next;
+        }
+        return null;
+    }
 }
