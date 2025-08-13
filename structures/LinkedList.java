@@ -1,20 +1,24 @@
 package structures;
-
 import core.Colors;
 import core.Drug;
 
 public class LinkedList {
-    private Node head;
+    public Node head; // Make public for access
     private int size;
 
     // Node inner class
-    private static class Node {
-        Drug drug;
-        Node next;
-        Node(Drug drug) {
+    public static class Node { // Make public static
+        public Drug drug; // Make public
+        public Node next; // Make public
+
+        public Node(Drug drug) {
             this.drug = drug;
             this.next = null;
         }
+    }
+
+    public LinkedList() {
+        this.head = null;
     }
 
     // Add drug to list
@@ -67,9 +71,44 @@ public class LinkedList {
         return null;
     }
 
+    // NEW: Search by name algorithm
+    public Drug searchByName(String name) {
+        Node current = head;
+        while (current != null) {
+            if (current.drug.name.toLowerCase().contains(name.toLowerCase())) {
+                return current.drug;
+            }
+            current = current.next;
+        }
+        return null;
+    }
+
+    // NEW: Search by supplier algorithm
+    public void searchBySupplier(String supplierName) {
+        Node current = head;
+        boolean found = false;
+        System.out.println("Drugs from supplier: " + supplierName);
+        
+        while (current != null) {
+            for (String supplier : current.drug.suppliers) {
+                if (supplier.toLowerCase().contains(supplierName.toLowerCase())) {
+                    current.drug.printInfo();
+                    System.out.println("─────────────────");
+                    found = true;
+                    break;
+                }
+            }
+            current = current.next;
+        }
+        
+        if (!found) {
+            System.out.println("No drugs found from supplier: " + supplierName);
+        }
+    }
+
     // Delete by code
     public boolean deleteByCode(String code) {
-        if (isEmpty()) return false;
+        if (head == null) return false;
 
         if (head.drug.code.equalsIgnoreCase(code)) {
             head = head.next;
@@ -89,16 +128,18 @@ public class LinkedList {
         return false;
     }
 
-    // Sort by price (simple bubble sort)
+    // Bubble sort by price algorithm
     public void sortByPrice() {
-        if (isEmpty()) return;
+        if (head == null || head.next == null) return;
 
         boolean swapped;
         do {
             swapped = false;
             Node current = head;
+            
             while (current.next != null) {
                 if (current.drug.price > current.next.drug.price) {
+                    // Swap the drugs
                     Drug temp = current.drug;
                     current.drug = current.next.drug;
                     current.next.drug = temp;
@@ -108,6 +149,57 @@ public class LinkedList {
             }
         } while (swapped);
     }
-    
+
+    // NEW: Bubble sort alphabetically by name algorithm
+    public void sortAlphabetically() {
+        if (head == null || head.next == null) return;
+
+        boolean swapped;
+        do {
+            swapped = false;
+            Node current = head;
+            
+            while (current.next != null) {
+                if (current.drug.name.compareToIgnoreCase(current.next.drug.name) > 0) {
+                    // Swap the drugs
+                    Drug temp = current.drug;
+                    current.drug = current.next.drug;
+                    current.next.drug = temp;
+                    swapped = true;
+                }
+                current = current.next;
+            }
+        } while (swapped);
+    }
+
+    public void printAll() {
+        if (head == null) {
+            System.out.println("No drugs in inventory.");
+            return;
+        }
+
+        Node current = head;
+        while (current != null) {
+            current.drug.printInfo();
+            System.out.println("─────────────────");
+            current = current.next;
+        }
+    }
+
+    // NEW: Get count of drugs
+    public int getCount() {
+        int count = 0;
+        Node current = head;
+        while (current != null) {
+            count++;
+            current = current.next;
+        }
+        return count;
+    }
+
+    // Add this method to your LinkedList class
+    public Node getHead() {
+        return head;
+    }
 }
 
