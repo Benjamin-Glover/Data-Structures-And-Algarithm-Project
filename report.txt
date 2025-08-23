@@ -1,0 +1,49 @@
+Pharmacy Inventory System - Algorithm & Data Structure Report
+
+1. Algorithm Performance Analysis
+
+ Bubble Sort (Used for sorting drugs)
+- Big O (Worst-case): O(n²)
+- Omega (Best-case): Ω(n) if the list is already sorted
+- Justification:** Simple to implement for small lists, but slow for large lists.
+
+Linear Search (Used for searching drugs by code, name, supplier)
+- Big O: O(n)
+- Omega: Ω(1) if the item is at the start
+- Justification: Works well for unsorted lists and is easy to code.
+
+ Min-Heap (Used for low stock alerts)
+- Insert/ExtractMin Big O: O(log n)
+- Omega: Ω(1) for best-case insert/extract
+- Justification: Efficient for quickly finding the lowest stock drug.
+
+2. Data Structure Choices
+
+LinkedList
+- Used for:** Drug inventory
+- Why:** Easy to add/remove drugs, no need for contiguous memory.
+- Trade-off:** Slower search and sort compared to arrays.
+
+HashMap
+- Used for: Customer and supplier profiles
+- Why: Fast lookup by ID, easy to manage unique profiles.
+- Trade-off: Uses more memory, not ordered.
+
+ArrayList
+- Used for: Sales history
+- Why: Fast append, easy to view recent sales.
+- Trade-off: Slower for deleting from the middle.
+
+MinHeap
+- Used for: Stock monitoring
+- Why: Efficiently finds drugs with lowest stock.
+- Trade-off: More complex to implement than simple lists.
+
+3. Algorithmic Trade-offs
+
+- Bubble Sort vs. Insertion Sort:** Bubble sort is easier for beginners, but slower for large lists. Insertion sort could be faster for nearly sorted data.
+- Linear Search vs. Binary Search:** Linear search works on unsorted lists. Binary search would require sorting first.
+- File-based storage vs. Database:** Files are simple and offline-friendly, but less efficient for very large data.
+
+---
+

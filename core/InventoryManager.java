@@ -27,7 +27,7 @@ public class InventoryManager {
         int stock = sc.nextInt();
         sc.nextLine(); // clear newline
 
-        Drug drug = new Drug(name, code, suppliers, expiry, price, stock);
+        Drug drug = new Drug(code,name,  suppliers, expiry, price, stock);
         inventory.add(drug);
         System.out.println(Colors.GREEN + " Drug added successfully." + Colors.RESET);
     }
@@ -132,7 +132,7 @@ public class InventoryManager {
 
     // UPDATE DRUG METHOD
     public void updateDrug() {
-        System.out.print(Colors.YELLOW + "→ Enter drug code to update: " + Colors.RESET);
+        System.out.print(Colors.YELLOW + "→ Enter drug a to update: " + Colors.RESET);
         String code = sc.nextLine().trim();
         Drug drug = inventory.searchByCode(code);
 
